@@ -1,0 +1,72 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tk-harness hook >/dev/null 2>&1 || true",
+            "async": true,
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tk-harness hook >/dev/null 2>&1 || true",
+            "async": true,
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tk-harness hook >/dev/null 2>&1 || true",
+            "async": true,
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(tk-harness prompt)",
+      "Bash(tk-harness prompt *)",
+      "Bash(tk-harness run engagement)",
+      "Bash(tk-harness run engagement *)",
+      "Bash(tk-harness task)",
+      "Bash(tk-harness task *)",
+      "Bash(tk-harness ask)",
+      "Bash(tk-harness ask *)",
+      "Bash(tk-harness answered)",
+      "Bash(tk-harness answered *)",
+      "Bash(tk-harness report)",
+      "Bash(tk-harness report *)",
+      "Bash(tk-harness openspec check)",
+      "Bash(tk-harness openspec check *)",
+      "Bash(tk-harness tracker fetch)",
+      "Bash(tk-harness tracker fetch *)",
+      "Bash(tk-harness tracker search)",
+      "Bash(tk-harness tracker search *)",
+      "Bash(tk-harness tracker key)",
+      "Bash(tk-harness tracker key *)",
+      "Bash(tk-harness tracker projects)",
+      "Bash(tk-harness tracker projects *)",
+      "Bash(openspec list)",
+      "Bash(openspec list *)",
+      "Bash(openspec status)",
+      "Bash(openspec status *)",
+      "Bash(openspec validate)",
+      "Bash(openspec validate *)"
+    ]
+  }
+}
