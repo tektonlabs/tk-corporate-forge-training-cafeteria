@@ -26,16 +26,17 @@ Why: <the reason a reviewer can repeat — the ADR, the incident, the client req
 
 ## Rules
 
-<!-- No project rules yet. Two examples of the kind that belong here — delete them or
-     make them real:
-
-### RR-1 — Money is never held in a float
+### RR-1 — Money is held as integer céntimos, named `…Cents`, never as a float or in soles
 Scope: apps/**/src/**
 Severity: blocking
-Why: rounding errors in invoice totals; amounts are integer minor units (cents).
+Why: what an employee pays must not drift by rounding. Every amount in the API is integer céntimos [OBSERVED: apps/api/src/db/schema.ts:1, apps/api/src/db/schema.ts:10,25,34-36], a percentage is rounded back to a whole céntimo [OBSERVED: apps/api/src/pricing/total.ts:33], and soles appear only when `formatPrice` displays them [OBSERVED: apps/web/src/format.ts:1-4] — the team's earlier rule as well [docs/pre-harness/AGENTS.md.txt].
 
-### RR-2 — A new runtime dependency is justified in the pull request description
-Scope: apps/*/package.json, apps/*/pyproject.toml
+### RR-2 — A change to what the API accepts or returns changes `apps/web/src/api.ts` in the same diff
+Scope: apps/api/src/app.ts, apps/api/src/db/schema.ts, apps/api/src/orders/validate.ts, apps/api/src/pricing/total.ts, apps/web/src/api.ts
+Severity: blocking
+Why: the web app re-declares the API's types by hand [OBSERVED: apps/web/src/api.ts:1-26, mirroring apps/api/src/db/schema.ts:3-39] and nothing compiles one against the other, so a renamed or reshaped field breaks the deployed web app silently. The team's earlier rule [docs/pre-harness/AGENTS.md.txt]. Retire this rule if the seam gets a shared contract.
+
+### RR-3 — The web app shows the limits the API sends; it never hard-codes a business rule
+Scope: apps/web/src/**
 Severity: should-fix
-Why: every dependency is a supply-chain and upgrade cost the client carries after handover.
--->
+Why: the order rules live on the server [OBSERVED: apps/api/src/config.ts:9-16], and the web app reads them from the menu response and from a refusal's body rather than repeating them [OBSERVED: apps/web/src/components/Cart.tsx:69, apps/web/src/format.ts:21,23]. A number copied into the interface disagrees with the server the day either changes.

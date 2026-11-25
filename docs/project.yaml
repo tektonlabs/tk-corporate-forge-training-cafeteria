@@ -1,0 +1,10 @@
+# Written by /tk-bootstrap, once the developer confirmed it. Nothing else writes this file.
+context: brownfield
+recorded: 2026-11-25
+confirmed_by: Pablo Abad
+tracker: { provider: jira, projects: [CAF] }
+evidence:
+  - application code on the default branch — 34 tracked files outside docs/, openspec/ and .claude/
+  - manifests — package.json (npm workspaces, cafeteria 0.4.0), apps/api/package.json (express 4.21), apps/web/package.json (react 18.3, vite 5.4)
+  - history — 10 commits, the first on 2026-05-04
+  - default branch — main
